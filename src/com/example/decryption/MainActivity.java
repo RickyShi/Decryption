@@ -87,15 +87,14 @@ public class MainActivity extends Activity {
 					line = br.readLine();
 					record++;
 					if (record == ACC_RECORD) {
-						//												TransmitData t = new TransmitData();
-//												t.execute(temp);
-						//												t.execute("QSE3pBqEjdFbDOjIvzNmKW74D31ek05jdFO2M4O9soQwGv1+/MHWWnh0Uk1jQejVBm/2OYfRDqnSaj9Wv1abXYtNYS4FFj37jM9GG4/t+t1GPLcyFP1ie+f5h7B2eNAT7B9DiNUlDvHRcHBwCcjJCu5Qy4iD2sB2vxKx1wY1GzhCUDiSd+TxgagBDKyc5KmPJpI4aVEleXIXseCJyK3pFihwY2gnAQuRV1Eh3ZujQHCswpYDhohua5AE02p+9oiDWPEllYGNyzUswZE/5YxH4SgR8elOMGNyhW3zi1txavas7dAh42WeGoyzWtYSYHJaOzUJaAbv/x8+63RC7KwVINQJGf2htqT+zNw+/RxWhnR2TgJPnjGhmVYQNhELYXtevmF9JqD0FmMKuIUNlLV/zyKLgsROO3dWIUwlPm3eeQbrFn7GuUp5Zl6HZWSyJP5+lJo2im7GsHPOiGuKFY4CsEjTzwq3JueJeYrv8YNHblc=");
+						//TransmitData t = new TransmitData();
+						//t.execute(temp);
 						temp = sb.toString();
 						HttpPost request = new HttpPost(SINGLE_UPLOAD_ADDRESS);
-						//						HttpPost request = new HttpPost(MULTI_UPLOAD_ADDRESS);
+						//HttpPost request = new HttpPost(MULTI_UPLOAD_ADDRESS);
 						List<NameValuePair> params = new ArrayList<NameValuePair>();
 						//single
-						//						params.add(new BasicNameValuePair("file_name", "chestsensor.1005.EQ02_4512006.D_11"));
+						//params.add(new BasicNameValuePair("file_name", "chestsensor.1005.EQ02_4512006.D_11"));
 						params.add(new BasicNameValuePair("data", temp));
 						Log.d("ricky", temp);
 						Log.d("ricky", "---------------------------------------");
