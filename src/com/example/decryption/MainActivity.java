@@ -29,12 +29,14 @@ import android.widget.Button;
 public class MainActivity extends Activity {
 	//SINGLE: location;
 	//Chest: Multiple: ACC,Chest
+	public final static String SINGLE_UNENCRYPT_UPLOAD_ADDRESS = "http://dslsrv8.cs.missouri.edu/~hw85f/Server/Crt2/dealWithBackupRAW.php";
 	public final static String SINGLE_UPLOAD_ADDRESS = "http://dslsrv8.cs.missouri.edu/~hw85f/Server/Crt2/writeArrayToFileDec.php";
 	public final static String MULTI_UPLOAD_ADDRESS = "http://dslsrv8.cs.missouri.edu/~hw85f/Server/Crt2/dealWithBackup.php";
-	private static final String FILE_NAME = "recovery/chestsensor.EQ02_4512006.D_11.txt";
+	private static final String FILE_NAME = "recovery/MOOD_DYSREGULATION.1005.F_04.txt";
 	private static final int ACC_RECORD = 6;
 	private static final int CHEST_RECORD = 6;
 	private static final int LOC_RECORD = 7;
+	private static final int SERVER_RECORD = 1;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
@@ -86,15 +88,17 @@ public class MainActivity extends Activity {
 					//					sb.append(System.lineSeparator());
 					line = br.readLine();
 					record++;
-					if (record == ACC_RECORD) {
+					if (record == CHEST_RECORD) {
 						//TransmitData t = new TransmitData();
 						//t.execute(temp);
 						temp = sb.toString();
+						// HttpPost request = new
+						// HttpPost(SINGLE_UPLOAD_ADDRESS);
 						HttpPost request = new HttpPost(SINGLE_UPLOAD_ADDRESS);
 						//HttpPost request = new HttpPost(MULTI_UPLOAD_ADDRESS);
 						List<NameValuePair> params = new ArrayList<NameValuePair>();
 						//single
-						//params.add(new BasicNameValuePair("file_name", "chestsensor.1005.EQ02_4512006.D_11"));
+						params.add(new BasicNameValuePair("file_name", "MOOD_DYSREGULATION.1005.F_04.txt"));
 						params.add(new BasicNameValuePair("data", temp));
 						Log.d("ricky", temp);
 						Log.d("ricky", "---------------------------------------");
