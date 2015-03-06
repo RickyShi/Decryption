@@ -31,8 +31,10 @@ public class MainActivity extends Activity {
 	//Chest: Multiple: ACC,Chest
 	public final static String SINGLE_UNENCRYPT_UPLOAD_ADDRESS = "http://dslsrv8.cs.missouri.edu/~hw85f/Server/Crt2/dealWithBackupRAW.php";
 	public final static String SINGLE_UPLOAD_ADDRESS = "http://dslsrv8.cs.missouri.edu/~hw85f/Server/Crt2/writeArrayToFileDec.php";
+	public final static String NIMH_SINGLE_UPLOAD_ADDRESS = "http://dslsrv8.cs.missouri.edu/~hw85f/Server/CrtNIMH/writeArrayToFileDec.php";
 	public final static String MULTI_UPLOAD_ADDRESS = "http://dslsrv8.cs.missouri.edu/~hw85f/Server/Crt2/dealWithBackup.php";
-	private static final String FILE_NAME = "recovery/MOOD_DYSREGULATION.1005.F_04.txt";
+	private static final String DIR_NAME = "recovery/";
+	private static final String FILE_NAME = "Location.1001.F_22.txt";
 	private static final int ACC_RECORD = 6;
 	private static final int CHEST_RECORD = 6;
 	private static final int LOC_RECORD = 7;
@@ -74,7 +76,8 @@ public class MainActivity extends Activity {
 	protected void decrypt() throws IOException {
 		// TODO Auto-generated method stub
 		File dir = Environment.getExternalStorageDirectory();
-		File encrypt = new File(dir, FILE_NAME);
+		String path = DIR_NAME + FILE_NAME;
+		File encrypt = new File(dir, path);
 		BufferedReader br = new BufferedReader(new FileReader(encrypt));
 		String temp = "";
 		int record = 0;
@@ -88,17 +91,19 @@ public class MainActivity extends Activity {
 					//					sb.append(System.lineSeparator());
 					line = br.readLine();
 					record++;
-					if (record == CHEST_RECORD) {
+					if (record == LOC_RECORD) {
 						//TransmitData t = new TransmitData();
 						//t.execute(temp);
 						temp = sb.toString();
 						// HttpPost request = new
 						// HttpPost(SINGLE_UPLOAD_ADDRESS);
-						HttpPost request = new HttpPost(SINGLE_UPLOAD_ADDRESS);
+						// HttpPost request = new
+						// HttpPost(SINGLE_UPLOAD_ADDRESS);
 						//HttpPost request = new HttpPost(MULTI_UPLOAD_ADDRESS);
+						HttpPost request = new HttpPost(NIMH_SINGLE_UPLOAD_ADDRESS);
 						List<NameValuePair> params = new ArrayList<NameValuePair>();
 						//single
-						params.add(new BasicNameValuePair("file_name", "MOOD_DYSREGULATION.1005.F_04.txt"));
+						params.add(new BasicNameValuePair("file_name", FILE_NAME));
 						params.add(new BasicNameValuePair("data", temp));
 						Log.d("ricky", temp);
 						Log.d("ricky", "---------------------------------------");
